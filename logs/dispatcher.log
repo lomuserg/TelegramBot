@@ -1,0 +1,8 @@
+2023-11-10 22:47:57 DEBUG TelegramBot:34 - hey
+2023-11-10 23:05:49 DEBUG TelegramBot:36 - Hello bro
+2023-11-10 23:05:49 ERROR TelegramBot:49 - org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException: Unable to deserialize response
+2023-11-10 23:06:27 DEBUG TelegramBot:36 - /help
+2023-11-10 23:06:28 ERROR TelegramBot:49 - org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException: Unable to deserialize response
+2023-11-10 23:32:38 DEBUG TelegramBot:46 - r
+2023-11-11 00:03:05 DEBUG TelegramBot:46 - 
+2023-11-11 00:03:27 DEBUG TelegramBot:46 - 

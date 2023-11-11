@@ -1,0 +1,6 @@
+server:
+  port: 8084
+
+bot:
+  name: "UGA_Helper_bot"
+  token: "6683608461:AAH9oZyl2pYRozPZsfEQ7WPBZmhOzO_Cg8M"
