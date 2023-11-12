@@ -56,8 +56,12 @@ public class UpdateController {
         var sendMMessage = messageUtils.generateSendMessageWithText(update, "I understand only TEXT");
         setView(sendMMessage);
     }
+    private void setMessageTypeView(Update update){
+        var sendMMessage = messageUtils.generateSendMessageWithText(update, "Hello");
+        setView(sendMMessage);
+    }
     private void setFileIsReceived(Update update) {
-        var sendMMessage = messageUtils.generateSendMessageWithText(update, "File(^.^)");
+        var sendMMessage = messageUtils.generateSendMessageWithText(update, "(^.^)");
         setView(sendMMessage);
     }
     private void setView(SendMessage sendMMessage) {
@@ -73,6 +77,6 @@ public class UpdateController {
     }
     private void processTextMessage(Update update) {
       updateProducer.produce(TEXT_MESSAGE_UPDATE,update);
-        setFileIsReceived(update);
+        setMessageTypeView(update); //all massage Answers Hello + logging
     }
 }
