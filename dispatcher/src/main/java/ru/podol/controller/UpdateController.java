@@ -5,16 +5,21 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.podol.controller.TelegramBot;
+import ru.podol.service.UpdateProducer;
 import ru.podol.utils.MessageUtils;
+
+import static ru.podol.model.RabbitQueue.*;
 
 @Component
 @Log4j
 public class UpdateController {
     private TelegramBot telegramBot;
     private MessageUtils messageUtils;
+    private UpdateProducer updateProducer;
 
-    public UpdateController(MessageUtils messageUtils){
+    public UpdateController(MessageUtils messageUtils, UpdateProducer updateProducer){
         this.messageUtils = messageUtils;
+        this.updateProducer = updateProducer;
     }
 
     public void  RegisterBot(TelegramBot telegramBot){
@@ -48,23 +53,26 @@ public class UpdateController {
     }
 
     private void setUnsupportedMessageTypeView(Update update) {
-    var sendMMessage = messageUtils.generateSendMessageWithText(update, "Я понимаю только текст, дружище");
-    setView(sendMMessage);
+        var sendMMessage = messageUtils.generateSendMessageWithText(update, "I understand only TEXT");
+        setView(sendMMessage);
     }
-
+    private void setFileIsReceived(Update update) {
+        var sendMMessage = messageUtils.generateSendMessageWithText(update, "File(^.^)");
+        setView(sendMMessage);
+    }
     private void setView(SendMessage sendMMessage) {
         telegramBot.sendAnswerMessage(sendMMessage);
     }
-
     private void processPhotoMessage(Update update) {
-        
+        updateProducer.produce(PHOTO_MESSAGE_UPDATE,update);
+        setFileIsReceived(update);
     }
-
     private void processDocMessage(Update update) {
-        
+        updateProducer.produce(DOC_MESSAGE_UPDATE,update);
+        setFileIsReceived(update);
     }
-
     private void processTextMessage(Update update) {
-        
+      updateProducer.produce(TEXT_MESSAGE_UPDATE,update);
+        setFileIsReceived(update);
     }
 }
