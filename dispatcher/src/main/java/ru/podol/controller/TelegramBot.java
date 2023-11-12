@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.util.Properties;
 //import java.util.logging.Logger;
 
 @Component
@@ -21,7 +19,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     private String BotName;
     @Value("${bot.token}")
     private String BotToken;  //this token need private
-    private UpdateController UpdateController;
+    private ru.podol.controller.UpdateController UpdateController;
 
     public TelegramBot(UpdateController UpdateController){
        this.UpdateController = UpdateController;
